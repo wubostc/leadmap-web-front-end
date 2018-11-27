@@ -19,8 +19,6 @@
 |*|
 \*/
 
-import { PlainObject } from "./index";
-
 
 type timepoint_t = number | string | Date;
 
@@ -31,9 +29,6 @@ type rm_t = (k: string, path?: string, sDomain?: string) => boolean;
 type has_t = (k: string) => boolean;
 type keys_t = () => string[] | null[];
 
-interface IfCookies extends PlainObject {
-  [func: string]: get_t | set_t | rm_t | has_t | keys_t;
-}
 
 namespace COOKIES {
 /**
@@ -96,8 +91,6 @@ export const __base_cookies = {
         sExpires = "; expires=" + vEnd;
       } else if (vEnd instanceof Date) {
         sExpires = "; expires=" + vEnd.toUTCString();
-      } else {
-        // nothing.
       }
     }
     document.cookie =
@@ -110,7 +103,7 @@ export const __base_cookies = {
       (bSecure ? "; secure" : "");
     return true;
   } as set_t
-} as IfCookies;
+};
 }
 
 const cookies = COOKIES.__base_cookies;
