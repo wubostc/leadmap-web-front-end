@@ -10,6 +10,8 @@
         "rootDir": "src",
         "target": "es2018",
         "newLine": "LF",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports" :true
     },
     "exclude": [
         "es",

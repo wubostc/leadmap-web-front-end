@@ -20,7 +20,13 @@ __MyInstance.interceptors.response.use((response): Promise<AxiosResponse<any>> |
 );
 __MyInstance.interceptors.request.use(
   (config: AxiosRequestConfig): AxiosRequestConfig | Promise<AxiosRequestConfig> => {
-    config.headers["X-Requested-With"] = document.cookie;
+    let payload;
+    try {
+      payload = `${document.cookie}; ${/lb_token=([^&]+)/.exec(location.href)[0]}`;
+    } catch (e) {
+      payload = null;
+    }
+    config.headers["X-Requested-With"] = payload;
     config.data = qs.stringify(config.data, { allowDots: true });
     return config;
   },

@@ -1,7 +1,5 @@
 extends: "tslint:recommended"
 rules:
-    max-line-length:
-        options: [120]
     new-parens: true
     no-arg: true
     no-bitwise: false
@@ -31,6 +29,9 @@ rules:
     interface-name: [false]
     ordered-imports: [false]
     object-literal-sort-keys: [false]
+    object-literal-key-quotes: false
+    max-line-length: false
+    one-variable-per-declaration: false
 jsRules:
     max-line-length:
         options: [120]
