@@ -1,4 +1,5 @@
 import Axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
+import Cookie from "./cookies";
 import * as qs from "qs";
 
 const reqcfg: AxiosRequestConfig = {
@@ -21,10 +22,17 @@ __MyInstance.interceptors.response.use((response): Promise<AxiosResponse<any>> |
 __MyInstance.interceptors.request.use(
   (config: AxiosRequestConfig): AxiosRequestConfig | Promise<AxiosRequestConfig> => {
     let payload;
+
+    let token;
     try {
-      payload = `${document.cookie}; ${/lb_token=([^&]+)/.exec(location.href)[0]}`;
+      token = `${/lb_token=([^&]+)/.exec(location.href)[0]}`;
     } catch (e) {
-      payload = null;
+      token = `lb_token=${Cookie.getItem("lb_token")}`;
+    }
+    if (token) {
+      payload = token;
+    } else {
+      payload = document.cookie;
     }
     config.headers["X-Requested-With"] = payload;
     config.data = qs.stringify(config.data, { allowDots: true });
