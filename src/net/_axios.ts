@@ -25,12 +25,12 @@ __MyInstance.interceptors.request.use(
 
     let token;
     try {
-      token = `${/lb_token=([^&]+)/.exec(location.href)[0]}`;
+      token = /lb_token=([^&]+)/.exec(location.href)[1];
     } catch (e) {
-      token = `lb_token=${Cookie.getItem("lb_token")}`;
+      token = Cookie.getItem("lb_token");
     }
     if (token) {
-      payload = token;
+      payload = `lb_token=${token}`;
     } else {
       payload = document.cookie;
     }
