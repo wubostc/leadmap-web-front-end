@@ -24,5 +24,6 @@
     "default-case": "error",
     "semi": ["error", "always", { "omitLastInOneLineBlock": true }],
     "no-useless-escape": "off"
-  }
+  },
+  "root": true
 }

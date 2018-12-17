@@ -11,5 +11,5 @@ export declare class CAxios {
     constructor(opts: AAOPTS);
     get_inst(): AxiosInstance;
 }
-declare const __MyInstance: AxiosInstance;
-export default __MyInstance;
+declare const axios: AxiosInstance;
+export { axios };
