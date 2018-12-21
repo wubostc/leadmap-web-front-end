@@ -17,7 +17,8 @@
     "build:lib": "tsc -P tsconfig.json --outDir lib",
     "build:es": "tsc -P tsconfig.json --module ES6 --outDir es",
     "build": "npm run lint && npm run build:lib",
-    "rebuild": "npm run clean && npm run build"
+    "rebuild": "npm run clean && npm run build",
+    "build2": "webpack --config webpack.config.js --profile --progress"
   },
   "author": "wb",
   "license": "ISC",
@@ -62,13 +63,26 @@
     "not ie <= 11"
   ],
   "dependencies": {
+    "@types/antd": "^1.0.0",
     "@types/chance": "^1.0.1",
     "@types/mapbox-gl": "^0.51.0",
+    "@types/prop-types": "^15.5.8",
     "@types/qs": "^6.5.1",
+    "@types/react": "^16.7.17",
+    "@types/react-router": "^4.4.3",
+    "@types/react-router-dom": "^4.3.1",
+    "antd": "^3.11.2",
     "axios": "^0.18.0",
     "chance": "^1.0.16",
+    "css-loader": "^2.0.1",
+    "less-loader": "^4.1.0",
     "mapbox-gl": "^0.52.0-beta.1",
+    "mini-css-extract-plugin": "^0.5.0",
+    "prop-types": "^15.6.2",
     "qs": "^6.5.2",
+    "react": "^16.6.3",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "serviceworker-webpack-plugin": "^1.0.1",
     "ts-loader": "^5.3.1",
     "typescript": "^3.1.6"
