@@ -1,52 +1,22 @@
 const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 
 module.exports = {
-  mode: "production",
-  entry:
-  {
-    init: "./_src_/lm.ts",
-  },
+  mode: "development",
+  entry:"./_src_/index.ts",
+  devtool: "eval-source-map",
   output: {
-    filename: "[name]-[chunkhash:16].js",
+    library: "libx",
+    libraryTarget: "umd",
+    auxiliaryComment: "leadmap libx",
+    filename: "index.js",
     path: path.resolve(__dirname, "lib"),
-    // publicPath: urlconfig["prod"]["sysconfig"]["login"]["url"]
+    
   },
-
-  optimization: 
-  {
-    runtimeChunk: true,
-    splitChunks: 
-    {
-      chunks: "all",
-      // minChunks: 10,
-      // minSize: 0,
-      maxInitialRequests: 4,
-      maxAsyncRequests: 6,
-      cacheGroups: 
-      {
-        react:
-        {
-          test: /react/i,
-          name: "react_bundle",
-          priority: 99,
-          reuseExistingChunk: true
-        },
-        vendor: {
-          test: path.resolve(__dirname, "../node_modules"),
-          name: "vendor",
-          priority: 0,
-          reuseExistingChunk: true
-        },
-      }
-    }
-  },
-
+  externals: [/react/i, /antd/i, /router/i, /qs/i, /axios/i],
   resolve: {
-    extensions: [".wasm",".mjs", ".ts", ".js", ".json", ".tsx"]
+    extensions: [".wasm",".mjs", ".ts", ".js", ".json", ".tsx", ".less"]
   },
-
   module: {
     rules: [
       {
@@ -66,21 +36,44 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
+          // {
+          //   loader: MiniCssExtractPlugin.loader
+          // },
           {
-            loader: MiniCssExtractPlugin.loader
+            loader: "style-loader",
+            options: {
+              sourceMap: true,
+            }
           },
           {
             loader: "css-loader",
             options: {
-              sourceMap: false,
+              sourceMap: true,
               importLoaders: 1
+            }
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              plugins: loader => {
+                return [
+                  // require('postcss-import')(),
+                  require("autoprefixer")({
+                    browers: [
+                      "> 5%",
+                      "last 2 major versions",
+                      "not ie <= 11"
+                    ]
+                  })
+                ];
+              }
             }
           },
           {
             loader: "less-loader",
             options: {
               javascriptEnabled: true,
-              sourceMap: false
+              sourceMap: true
             }
           }
         ]
@@ -88,13 +81,7 @@ module.exports = {
     ]
   },
 
-  plugins: [
-
- 
-    new MiniCssExtractPlugin({
-      filename: "[name]_[hash:16].css",
-      chunkFilename: "[id]_[contenthash].css",
-    }),
-
-  ]
+  // plugins: [
+  //   new MiniCssExtractPlugin()
+  // ]
 };
