@@ -2,9 +2,9 @@ const path = require("path");
 
 
 module.exports = {
-  mode: "development",
+  mode: "none",
   entry:"./_src_/index.ts",
-  devtool: "eval-source-map",
+  devtool: "cheap-source-map",
   output: {
     library: "libx",
     libraryTarget: "umd",
