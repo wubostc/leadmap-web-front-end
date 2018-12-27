@@ -5,10 +5,9 @@ import "./index.less";
 export declare type future = () => Promise<{
     default: React.ComponentType<any>;
 }>;
-export declare type future_package = (cm: match) => future | [future, object];
 export interface CAsyncRouteOwnProps_t {
-    toload?: future;
-    toload_matched?: future_package;
+    toload?: future | [future, object];
+    toload_matched?: (cm: match) => future | [future, object];
     props?: object;
     renderFactory?: "render" | "component";
 }

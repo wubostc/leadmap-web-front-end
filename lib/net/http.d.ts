@@ -9,10 +9,10 @@ export interface AAOPTS {
 export declare class CAxios {
     private instance;
     constructor(opts: AAOPTS);
-    protected request(config: AxiosRequestConfig): AxiosRequestConfig;
-    protected request1(config: AxiosRequestConfig): AxiosRequestConfig;
+    private static request;
+    private static request1;
     get_inst(): AxiosInstance;
-    protected static set_auth(config: AxiosRequestConfig): void;
+    static set_auth(config: AxiosRequestConfig): void;
 }
 declare const axios: AxiosInstance;
 export { axios };
