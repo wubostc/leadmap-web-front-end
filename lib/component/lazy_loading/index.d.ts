@@ -33,14 +33,15 @@ export interface ex_routes_t {
 export declare type LazyLoadingProps_t = CAsyncRouteOwnProps_t & RouteComponentProps & RouteProps;
 declare type CAsyncRouteProps_t = CAsyncRouteOwnProps_t & RouteComponentProps;
 declare type CAsyncRouteState_t = {
-    exception: any;
+    exception: Error;
 };
 export declare class CAsyncRoute extends React.Component<CAsyncRouteProps_t> {
-    private static stack_err;
+    private static stack;
     state: CAsyncRouteState_t;
     constructor(props: CAsyncRouteProps_t, context: any);
     render(): JSX.Element;
-    componentDidCatch(exception: any): void;
+    shouldComponentUpdate(nextProps: CAsyncRouteProps_t, nextState: CAsyncRouteState_t): any;
+    componentDidCatch(exception: Error): void;
     private static redirect_factory;
     static dynamic_renders_routers(subMenus: subMenus_t[], mapping_routes: mapping_routes_t & ex_routes_t, { with_switch, with_redirect, base_path }?: op_dynamic_router): any[] | JSX.Element;
 }
