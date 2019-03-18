@@ -7,4 +7,4 @@ dist
 .npmignore
 .vscode
 .idea
-_src_
+lib
