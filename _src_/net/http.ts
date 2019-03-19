@@ -3,7 +3,7 @@ import Cookie from "../cookies";
 import * as qs from "qs";
 
 export // content type
-const enum CT {
+enum CT {
   URLENCODED,
   JSON
 }

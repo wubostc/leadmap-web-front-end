@@ -3,10 +3,8 @@ import { RouteProps, Route, Switch, Redirect, withRouter } from "react-router-do
 import { SwitchProps, match, RouteComponentProps, RouteChildrenProps, RedirectProps } from "react-router";
 import rc_recivers_set from "../../rc_recivers";
 import "./index.less";
-// import { CAsyncRoute } from "./index.1";
 
-export
-namespace lazyloading {
+
 
 
 function gen_path(push_path: string | string[], base_path: string = "") {
@@ -385,5 +383,5 @@ function dynamic_renders_routers(
 }
 
 
-}
+
 
