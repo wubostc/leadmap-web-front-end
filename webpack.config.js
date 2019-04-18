@@ -23,6 +23,8 @@ module.exports = {
         test: /\.tsx?$/,
         enforce: "pre",
         use: [{
+          loader: "babel-loader"
+        }, {
           loader: "ts-loader"
         }, {
           loader: "tslint-loader",

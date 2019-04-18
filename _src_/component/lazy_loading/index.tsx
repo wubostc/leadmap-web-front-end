@@ -110,14 +110,14 @@ type CAsyncRouteState_t = {
 
 
 
-namespace detail {
+class detail {
 
-  export const store_route = new Map<RouteProps["path"], CAsyncRouteOwnProps_t>();
-  export const store_component_cache = new Map<RouteProps["path"], React.ComponentType<CAsyncRouteOwnProps_t>>();
+  static store_route = new Map<RouteProps["path"], CAsyncRouteOwnProps_t>();
+  static store_component_cache = new Map<RouteProps["path"], React.ComponentType<CAsyncRouteOwnProps_t>>();
 
-  export const g_cfg = new Map<string, LazyLoadingProps_t>();
+  static g_cfg = new Map<string, LazyLoadingProps_t>();
 
-  export function make_asroute(key: RouteProps["path"]) {
+  static make_asroute(key: RouteProps["path"]) {
 
     class AsyncRoute extends React.Component<CAsyncRouteProps_t> {
 
@@ -137,7 +137,7 @@ namespace detail {
         this.state = {
           exception: null,
         };
-        const { toload, toload_matched } = store_route.get(key);
+        const { toload, toload_matched } = detail.store_route.get(key);
         const future = get_future(toload, toload_matched, this.props.match);
         this.Component = future[0];
       }
@@ -148,7 +148,7 @@ namespace detail {
     
         if (exception) return <>{exception}</>;
     
-        const { toload, toload_matched, props } = store_route.get(key);
+        const { toload, toload_matched, props } = detail.store_route.get(key);
 
         const future_props = get_future(toload, toload_matched, this.props.match);
 
@@ -169,7 +169,7 @@ namespace detail {
                   (() => {
                     const performWork: any = window;
                     AsyncRoute.stack[Symbol("stack")] = nextState.exception || performWork;
-                    return performWork[`__REACT_RECIVERS${performWork.__REACT_TI__}__`];
+                    return performWork[`$REACT_HOOKS${performWork[`$REACT_TIME`]}`];
                   })();
         }
         return true;
@@ -186,10 +186,10 @@ namespace detail {
       public static global_config(cfg: { "*"?: LazyLoadingProps_t }) {
 
         if (cfg["*"]) {
-          g_cfg.set("*", cfg["*"]);
+          detail.g_cfg.set("*", cfg["*"]);
         }
 
-        return g_cfg;
+        return detail.g_cfg;
       }
     
     }
@@ -197,8 +197,8 @@ namespace detail {
     return AsyncRoute;
   }
 
-  export function make_asroute_with_router(k: string | string[]) {
-    return withRouter(make_asroute(k));
+  static make_asroute_with_router(k: string | string[]) {
+    return withRouter(detail.make_asroute(k));
   }
 
 

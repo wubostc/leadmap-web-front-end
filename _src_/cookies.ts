@@ -30,11 +30,11 @@ type has_t = (k: string) => boolean;
 type keys_t = () => string[] | null[];
 
 
-namespace COOKIES {
+const COOKIES = {
 /**
  * @see {@link https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie}
  */
-export const __base_cookies = {
+
   getItem: function(sKey) {
     return (
       decodeURIComponent(
@@ -104,7 +104,15 @@ export const __base_cookies = {
     return true;
   } as set_t
 };
-}
+new Proxy(COOKIES, {
+  get: (target, p, r) => {
+    if (p in target) {
+      const _t: any = target;
+      console.warn("这个库不再被维护了，请更换其它库！");
+      return _t[p];
+    }
+  }
+});
 
-const cookies = COOKIES.__base_cookies;
+const cookies = COOKIES;
 export default cookies;
