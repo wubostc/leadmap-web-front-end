@@ -169,7 +169,7 @@ class detail {
                   (() => {
                     const performWork: any = window;
                     AsyncRoute.stack[Symbol("stack")] = nextState.exception || performWork;
-                    return performWork[`$REACT_HOOKS${performWork[`$REACT_TIME`]}`];
+                    return performWork[`&REACT_HOOKS${performWork[`&REACT_DEBUG`]}`];
                   })();
         }
         return true;
