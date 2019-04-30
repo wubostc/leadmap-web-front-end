@@ -4,7 +4,7 @@ import { Cookies } from "react-cookie";
 
 
 export
-interface Uploader_t {
+interface UploaderCore_t {
   endpoint: UploadOptions["endpoint"];
   downloadUrl: string;
   retryDelays?: UploadOptions["retryDelays"];
@@ -25,17 +25,17 @@ function _read_as_buf(blob: Blob, callback: (fr: FileReader, e: ProgressEvent) =
 }
 
 export
-class Uploader {
+class UploaderCore {
 
-  private opts: Uploader_t;
+  private opts: UploaderCore_t;
   private upload: Upload;
 
-  public constructor(opts: Uploader_t) {
+  public constructor(opts: UploaderCore_t) {
     this.upload = null;
     this.opts = opts;
   }
 
-  public read(file: File, read_callback?: (upload: Uploader) => void) {
+  public read(file: File, read_callback?: (upload: UploaderCore) => void) {
     const opts = this.opts;
   
     _read_as_buf(file, (fr, e) => {
@@ -51,7 +51,7 @@ class Uploader {
             resume: true,
             retryDelays: opts.retryDelays || [0, 3000, 5000, 10000, 20000],
             headers: {
-              "X-Requested-With": Uploader.gettoken(),
+              "X-Requested-With": UploaderCore.gettoken(),
               "fileMd5": md5,
               "originName": encodeURI(file.name),
             },
@@ -93,7 +93,7 @@ class Uploader {
     this.upload.abort();
   }
 
-  public setopts(opts: Uploader_t) {
+  public setopts(opts: UploaderCore_t) {
     this.opts = opts;
   }
 

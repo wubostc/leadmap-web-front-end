@@ -4,7 +4,7 @@ upload demo
 import React, { useEffect, useRef, useState } from "react";
 import { Progress, Row, Col, } from "antd";
 import { ProgressProps } from "antd/lib/progress";
-import { Uploader } from "../../web-front-ends-lib";
+import { UploaderCore } from "../../web-front-ends-lib";
 
 
 
@@ -14,14 +14,14 @@ export function MyUpload() {
   const [file, setFile] = useState<File>(null as File);
   const [downloadurl, setDownloadurl] = useState<string>(null);
 
-  const uploader = useRef<Uploader>(null);
+  const uploader = useRef<UploaderCore>(null);
 
   useEffect(() => {
     if (!file) {
       return;
     }
 
-    new Uploader({
+    new UploaderCore({
       "downloadUrl": "http://183.129.204.238:19007/fastdfs/",
       "endpoint": "http://192.168.1.45:8005/upload/part/file",
       "onError": (error) => {

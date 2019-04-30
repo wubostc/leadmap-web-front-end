@@ -3,7 +3,7 @@ export { default as Cookies } from "./cookies";
 export * from "./net/http";
 // export * from "./algorithm";
 export * from "./lazy_loading/index";
-export * from "./upload/index";
+export * from "./upload_core/index";
 // import { asroute as lazy_loading_detail } from "./component/lazy_loading/index";
 
 function rnd(seed: number) {
