@@ -28,7 +28,7 @@ export
 class UploaderCore {
 
   private opts: UploaderCore_t;
-  private upload: Upload;
+  public upload: Upload;
 
   public constructor(opts: UploaderCore_t) {
     this.upload = null;
