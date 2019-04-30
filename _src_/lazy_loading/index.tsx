@@ -1,8 +1,44 @@
 import * as React from "react";
 import { RouteProps, Route, Switch, Redirect, withRouter } from "react-router-dom";
 import { SwitchProps, match, RouteComponentProps, RouteChildrenProps, RedirectProps } from "react-router";
-import rc_recivers_set from "../../rc_recivers";
-import "./index.less";
+import rc_recivers_set from "../rc_recivers";
+import { css, injectGlobal, keyframes, cx } from "emotion";
+
+injectGlobal`applied lazy_loading style.`;
+
+const kf = keyframes`
+to {
+  opacity: 0.1;
+  transform: translate3d(0, -10px, 0);
+}`;
+
+const StyleCAsyncRoute = css({
+  width: "100%",
+  display: "flex",
+  justifyContent: "center"
+});
+
+const StyleDiv = css({
+  width: "1rem",
+  maxWidth: "13px",
+  height: "1rem",
+  maxHeight: "13px",
+  margin: `1rem 0.1rem`,
+  background: `#8385aa`,
+  borderRadius: `50%`,
+  animation: `${kf} 0.6s infinite alternate`,
+});
+
+const StyleDiv2 = css({
+  animationDelay: "0.2s"
+});
+
+const StyleDiv3 = css({
+  animationDelay: "0.4s"
+});
+
+
+// import "./index.less";
 
 
 
@@ -70,10 +106,10 @@ interface ex_routes_t {
 }
 
 const BouncingLoader = () =>
-  <div className="CAsyncRoute-bouncing-loader">
-    <div></div>
-    <div></div>
-    <div></div>
+  <div className={StyleCAsyncRoute}>
+    <div className={cx(StyleDiv)}></div>
+    <div className={cx(StyleDiv, StyleDiv2)}></div>
+    <div className={cx(StyleDiv, StyleDiv3)}></div>
   </div>;
 
 
@@ -112,12 +148,12 @@ type CAsyncRouteState_t = {
 
 class detail {
 
-  static store_route = new Map<RouteProps["path"], CAsyncRouteOwnProps_t>();
-  static store_component_cache = new Map<RouteProps["path"], React.ComponentType<CAsyncRouteOwnProps_t>>();
+  public static store_route = new Map<RouteProps["path"], CAsyncRouteOwnProps_t>();
+  public static store_component_cache = new Map<RouteProps["path"], React.ComponentType<CAsyncRouteOwnProps_t>>();
 
-  static g_cfg = new Map<string, LazyLoadingProps_t>();
+  public static g_cfg = new Map<string, LazyLoadingProps_t>();
 
-  static make_asroute(key: RouteProps["path"]) {
+  public static make_asroute(key: RouteProps["path"]) {
 
     class AsyncRoute extends React.Component<CAsyncRouteProps_t> {
 
@@ -197,7 +233,7 @@ class detail {
     return AsyncRoute;
   }
 
-  static make_asroute_with_router(k: string | string[]) {
+  public static make_asroute_with_router(k: string | string[]) {
     return withRouter(detail.make_asroute(k));
   }
 

@@ -13,7 +13,7 @@ module.exports = {
     path: path.resolve(__dirname, "lib"),
     
   },
-  externals: [/react/i, /antd/i, /router/i, /qs/i, /axios/i],
+  externals: ["react", "react-dom", "react-router", /antd/i, "react-router-dom", "qs", /axios/i, /emotion/i, "react-cookie"],
   resolve: {
     extensions: [".wasm",".mjs", ".ts", ".js", ".json", ".tsx", ".less"]
   },
