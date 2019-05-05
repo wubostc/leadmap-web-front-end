@@ -7,6 +7,7 @@ export
 interface UploaderCore_t {
   endpoint: UploadOptions["endpoint"];
   downloadUrl: string;
+  chunkSize: UploadOptions["chunkSize"];
   retryDelays?: UploadOptions["retryDelays"];
   onError?: UploadOptions["onError"];
   onProgress?: UploadOptions["onProgress"];
@@ -55,6 +56,7 @@ class UploaderCore {
               "fileMd5": md5,
               "originName": encodeURI(file.name),
             },
+            chunkSize: opts.chunkSize || 1024 * 2048,
             fingerprint: (file, opts) => md5,
             onError: (err) => {
               opts.onError && opts.onError(err);

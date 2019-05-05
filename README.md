@@ -4,17 +4,19 @@ upload demo
 import React, { useEffect, useRef, useState } from "react";
 import { Progress, Row, Col, } from "antd";
 import { ProgressProps } from "antd/lib/progress";
-import { UploaderCore } from "../../web-front-ends-lib";
+import { UploaderCore } from "leadmap-web-front-end";
 
 
 
 export function MyUpload() {
   const [precent, setPrecent] = useState(0);
   const [status, setStatus] = useState<ProgressProps["status"]>("normal");
-  const [file, setFile] = useState<File>(null as File);
+  const [file, setFile] = useState<File>(null);
   const [downloadurl, setDownloadurl] = useState<string>(null);
 
   const uploader = useRef<UploaderCore>(null);
+  const ok_file = useRef<File>(null);
+
 
   useEffect(() => {
     if (!file) {
@@ -34,6 +36,7 @@ export function MyUpload() {
         console.log(bytesSent, bytesTotal, percentage + "%")
       },
       "onSuccess": (url, id, upload) => {
+        ok_file.current = upload.file as File;
         setDownloadurl(url);
         setPrecent(100);
         setStatus("success");
@@ -85,11 +88,10 @@ export function MyUpload() {
       </Row>
       <Row>
         <Col span={12} push={6}>
-          { status === "success" ? <a href={downloadurl}>{`下载: ${file.name}`}</a> : null }
+          { status === "success" ? <a href={downloadurl}>{`下载: ${ok_file.current.name}`}</a> : null }
         </Col>
       </Row>
     </>
   );
 }
-
 ```
