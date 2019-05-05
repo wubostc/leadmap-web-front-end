@@ -7,7 +7,7 @@ export
 interface UploaderCore_t {
   endpoint: UploadOptions["endpoint"];
   downloadUrl: string;
-  chunkSize: UploadOptions["chunkSize"];
+  chunkSize?: UploadOptions["chunkSize"];
   retryDelays?: UploadOptions["retryDelays"];
   onError?: UploadOptions["onError"];
   onProgress?: UploadOptions["onProgress"];
